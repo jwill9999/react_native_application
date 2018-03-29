@@ -40,6 +40,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jwill9999/react_native_application.git"
+    "url": "git@github.com:jwill9999/react_native_application.git"
   }
 }
