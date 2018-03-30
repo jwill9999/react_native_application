@@ -27,6 +27,7 @@
         "no-dupe-keys": 0,
         "no-console": 0,
         "react/prefer-stateless-function": "off",
-        "no-use-before-define": "off"
+        "no-use-before-define": "off",
+        "react/prop-types": "off"
     }
 }

@@ -1,32 +1,43 @@
 import React from "react";
-import { StyleSheet, View, TextInput, Button, Text } from "react-native";
+import { StyleSheet, View, TextInput, Button } from "react-native";
+import ListItem from "./src/ListItem/ListItem";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: "", placeName: [] };
+    this.state = {
+      textValue: "",
+      places: ["Sleaford", "Grantham", "Lincoln"]
+    };
   }
+  
   buttonPress = () => {
-    if (this.state.text.trim() === "") {
+    if (this.state.textValue.trim() === "") {
       return;
     }
     this.setState(prevState => ({
-      placeName: prevState.placeName.concat(prevState.text),
-      text: ""
+      places: prevState.places.concat(prevState.textValue),
+      textValue: ""
     }));
   };
 
   render() {
-    const places = this.state.placeName.map(place => (
-      <Text key={place}>{place}</Text>
+    const { places, textValue } = this.state;
+    const placeList = places.map(place => (
+      <ListItem key={place} places={place} onItemPress={() => alert(place)} />
     ));
+
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            value={this.state.text}
-            onChangeText={text => this.setState({ text })}
+            value={textValue}
+            onChangeText={value =>
+              this.setState({
+                textValue: value
+              })
+            }
             placeholder="Add Your Text"
           />
           <Button
@@ -35,7 +46,7 @@ export default class App extends React.Component {
             onPress={this.buttonPress}
           />
         </View>
-        <View>{places}</View>
+        {placeList}
       </View>
     );
   }
@@ -51,7 +62,9 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "70%",
-    height: 40
+    height: 40,
+    borderBottomWidth: 1,
+    borderBottomColor: "#1a75ff"
   },
   inputContainer: {
     width: "100%",
