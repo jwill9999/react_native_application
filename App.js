@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, View, TextInput, Button } from "react-native";
-import ListItem from "./src/ListItem/ListItem";
+import { StyleSheet, View } from "react-native";
+
+import { PlaceList, PlaceInput } from "./src/index";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -10,7 +11,13 @@ export default class App extends React.Component {
       places: ["Sleaford", "Grantham", "Lincoln"]
     };
   }
-  
+
+  onChangeText = value => {
+    this.setState({
+      textValue: value
+    });
+  };
+
   buttonPress = () => {
     if (this.state.textValue.trim() === "") {
       return;
@@ -23,30 +30,15 @@ export default class App extends React.Component {
 
   render() {
     const { places, textValue } = this.state;
-    const placeList = places.map(place => (
-      <ListItem key={place} places={place} onItemPress={() => alert(place)} />
-    ));
 
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            value={textValue}
-            onChangeText={value =>
-              this.setState({
-                textValue: value
-              })
-            }
-            placeholder="Add Your Text"
-          />
-          <Button
-            style={styles.button}
-            title="Add"
-            onPress={this.buttonPress}
-          />
-        </View>
-        {placeList}
+        <PlaceInput
+          textValue={textValue}
+          onChangeText={this.onChangeText}
+          onButtonPress={this.buttonPress}
+        />
+        <PlaceList places={places} />
       </View>
     );
   }
@@ -59,20 +51,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f6f6",
     alignItems: "center",
     justifyContent: "flex-start"
-  },
-  input: {
-    width: "70%",
-    height: 40,
-    borderBottomWidth: 1,
-    borderBottomColor: "#1a75ff"
-  },
-  inputContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-  button: {
-    width: "30%"
   }
 });
