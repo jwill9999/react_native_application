@@ -4,8 +4,12 @@ import { View, StyleSheet } from "react-native";
 import { ListItem } from "../../index";
 
 const PlaceList = props => {
-  const placeList = props.places.map(place => (
-    <ListItem key={place} places={place} onItemPress={() => alert(place)} />
+  const placeList = props.places.map((place, i) => (
+    <ListItem
+      key={place}
+      places={place}
+      onItemPress={() => props.onItemDelete(i)}
+    />
   ));
   return <View style={styles.listItem}>{placeList}</View>;
 };

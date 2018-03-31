@@ -11,13 +11,30 @@ export default class App extends React.Component {
       places: ["Sleaford", "Grantham", "Lincoln"]
     };
   }
-
+  /*
+  * This method watches for changes to the text field
+  * and resets state therefore re rendering the view.  
+  */
   onChangeText = value => {
     this.setState({
       textValue: value
     });
   };
 
+  /* Method to delete an item from the places array
+  *  by tapping on the list item. This filters the 
+  *  array and returns a new arry minus that list item 
+  */
+  deletePlace = index => {
+    this.setState(prevState => ({
+      places: prevState.places.filter((place, i) => i !== index)
+    }));
+  };
+  /*
+  * On button press check if returned string is empty. If
+  * not then concatinate onto places array new value and 
+  * reset input field to empty string
+  */
   buttonPress = () => {
     if (this.state.textValue.trim() === "") {
       return;
@@ -38,7 +55,7 @@ export default class App extends React.Component {
           onChangeText={this.onChangeText}
           onButtonPress={this.buttonPress}
         />
-        <PlaceList places={places} />
+        <PlaceList places={places} onItemDelete={this.deletePlace} />
       </View>
     );
   }
