@@ -4,7 +4,7 @@ import { FlatList, StyleSheet } from "react-native";
 import { ListItem } from "../../index";
 
 const PlaceList = props => {
-  console.log(props);
+  console.log("placelist ", props);
   return (
     <FlatList
       style={styles.listItem}
@@ -12,6 +12,7 @@ const PlaceList = props => {
       renderItem={({ item }) => (
         <ListItem
           places={item.value}
+          image={item.image}
           onItemPress={() => props.onItemDelete(item.key)}
         />
       )}

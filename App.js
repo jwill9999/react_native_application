@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 
 import { PlaceList, PlaceInput } from "./src/index";
+import listImage from "./assets/screenshot.jpg";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -43,7 +44,8 @@ export default class App extends React.Component {
     this.setState(prevState => ({
       places: prevState.places.concat({
         key: prevState.textValue,
-        value: prevState.textValue
+        value: prevState.textValue,
+        image: listImage
       }),
       textValue: ""
     }));
@@ -59,7 +61,7 @@ export default class App extends React.Component {
           onChangeText={this.onChangeText}
           onButtonPress={this.buttonPress}
         />
-        <PlaceList places={places} onItemDelete={this.deletePlace} />
+        <PlaceList places={places} onItemDelete={this.deletePlace}  />
       </View>
     );
   }
