@@ -1,13 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const ListItem = props => (
-  <TouchableOpacity style={styles.listItem} onPress={props.onItemPress}>
-    <View>
-      <Text>{props.places}</Text>
-    </View>
-  </TouchableOpacity>
-);
+const ListItem = props => {
+ 
+  return (
+    <TouchableOpacity style={styles.listItem} onPress={props.onItemPress}>
+      <View>
+        <Text>{props.places}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   listItem: {

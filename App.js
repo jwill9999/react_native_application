@@ -8,7 +8,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       textValue: "",
-      places: ["Sleaford", "Grantham", "Lincoln"]
+      places: []
     };
   }
   /*
@@ -26,8 +26,9 @@ export default class App extends React.Component {
   *  array and returns a new arry minus that list item 
   */
   deletePlace = index => {
+    console.log("index passed is pressed ");
     this.setState(prevState => ({
-      places: prevState.places.filter((place, i) => i !== index)
+      places: prevState.places.filter(place => place.key !== index)
     }));
   };
   /*
@@ -40,7 +41,10 @@ export default class App extends React.Component {
       return;
     }
     this.setState(prevState => ({
-      places: prevState.places.concat(prevState.textValue),
+      places: prevState.places.concat({
+        key: prevState.textValue,
+        value: prevState.textValue
+      }),
       textValue: ""
     }));
   };
